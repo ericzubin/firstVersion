@@ -1,0 +1,121 @@
+/*
+ * Copyright (C) 2014 VenomVendor <info@VenomVendor.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package com.embeddedlapps.primeraversion;
+
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.ViewHolder> {
+
+    private final FragmentActivity mActivity;
+    private final List<UserDetails> mUserDetails = new ArrayList<UserDetails>();
+    OnItemClickListener mItemClickListener;
+
+    public ListAdapterHolder(FragmentActivity mActivity) {
+        this.mActivity = mActivity;
+        createUserDetails();
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent , int viewType) {
+        final LayoutInflater mInflater = LayoutInflater.from(parent.getContext());
+        final View sView = mInflater.inflate(R.layout.single_list_item, parent, false);
+        return new ViewHolder(sView);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder , int position) {
+        holder.vName.setText("Name: " + mUserDetails.get(position).getName());
+        holder.imageView.setImageResource(mUserDetails.get(position).getIdIMagen());
+
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return mUserDetails.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView vName, vSex, vId, vAge;
+        ImageView imageView;
+
+        public ViewHolder(View view) {
+            super(view);
+            vName = (TextView) view.findViewById(R.id.list_name);
+            imageView=(ImageView)view.findViewById(R.id.imageView);
+
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(v, getPosition());
+            }
+        }
+
+
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view, int position);
+    }
+
+    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
+    /* ==========This Part is not necessary========= */
+
+    /**
+     * Create Random Users
+     */
+    private void createUserDetails() {
+        for (int i = 0; i < 100; i++) {
+            final UserDetails mDetails = new UserDetails();
+            mDetails.setName("Name " + i);
+            mDetails.setIdIMagen(R.drawable.one);
+            mDetails.setIdIMagen((i % 2) == 0 ? R.drawable.two : R.drawable.one);
+
+            mUserDetails.add(mDetails);
+        }
+    }
+
+    /*
+     * Snippet from http://stackoverflow.com/a/363692/1008278
+     */
+    public static int randInt(int min , int max) {
+        final Random rand = new Random();
+        return rand.nextInt((max - min) + 1) + min;
+    }
+
+    /* ==========This Part is not necessary========= */
+
+}

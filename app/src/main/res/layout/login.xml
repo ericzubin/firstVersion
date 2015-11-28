@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:weightSum="1">
+
+
+   <!--
+    <com.facebook.login.widget.ProfilePictureView
+        android:id="@+id/picture"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="200sp"
+        android:layout_height="200sp"/> -->
+
+    <TextView
+        android:id="@+id/Nombre2"
+        android:text=""
+        android:layout_width="180dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.09"
+        android:layout_gravity="center_horizontal" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:id="@+id/twitter_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerInParent="true"/>
+
+
+    <Button
+        android:id="@+id/registro"
+        android:text="Registrate"
+        android:layout_gravity="center"
+        android:layout_width="200sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LogOut"
+        android:id="@+id/button_logout"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp" />
+
+
+
+      <Button
+           android:id="@+id/details"
+           android:text="Show details"
+           android:layout_gravity="center"
+           android:layout_width="200sp"
+           android:layout_marginBottom="20dp"
+          android:visibility="gone"
+           android:layout_height="wrap_content" />
+
+       <Button
+           android:id="@+id/share"
+           android:text="Share"
+           android:layout_gravity="center"
+           android:layout_width="200sp"
+           android:visibility="gone"
+           android:layout_height="wrap_content" />
+
+
+
+   </LinearLayout>

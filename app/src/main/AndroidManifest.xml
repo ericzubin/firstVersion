@@ -2,12 +2,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.embeddedlapps.primeraversion" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission
+        android:name="com.embeddedlapps.primeraversion.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.embeddedlapps.primeraversion.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
+
+
+
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+        <provider android:authorities="com.facebook.app.FacebookContentProvider505849976234316"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+
         <activity
             android:name=".SplashScreenActivity"
             android:label="@string/app_name"
@@ -18,8 +55,82 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity"
             android:label="@string/app_name"></activity>
+
+        <activity android:name=".Login"
+            android:label="@string/app_name"></activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ad71516c0690e07d4f14b871157edf4e959276bf" />
+
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+
+
+
+
+        <activity
+            android:name="com.embeddedlapps.primeraversion.Registro"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" android:noHistory="true">
+        </activity>
+
+        <activity
+            android:name="com.embeddedlapps.primeraversion.GreetingActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" android:noHistory="true">
+        </activity>
+
+        <activity
+            android:name="com.embeddedlapps.primeraversion.Usuarios"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" android:noHistory="true">
+        </activity>
+
+        <activity
+            android:name=".EnvioMSJ"
+            android:label="Enviar MSJ" >
+        </activity>
+
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.embeddedlapps.primeraversion" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".GCMNotificationIntentService" />
+
+        <activity
+            android:name=".ActividadDetalle"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="Mapas"/>
+
+
+        <activity
+            android:name=".Inicio"
+            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+
+
+
     </application>
 
 </manifest>
