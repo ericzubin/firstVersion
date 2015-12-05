@@ -22,13 +22,13 @@ public class UserDetails {
     private String name;
     private String sex;
     private int age;
-    private int IdIMagen;
+    private String IdIMagen;
 
-    public int getIdIMagen() {
+    public String getIdIMagen() {
         return IdIMagen;
     }
 
-    public void setIdIMagen(int idIMagen) {
+    public void setIdIMagen(String idIMagen) {
         IdIMagen = idIMagen;
     }
 

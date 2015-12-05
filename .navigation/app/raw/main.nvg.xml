@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+  ns = "http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+  <locations  
+    class = "java.util.ArrayList">
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.EnvioMSJ"/>
+      <point      
+        x = "1768"      
+        y = "100"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.SplashScreenActivity"/>
+      <point      
+        x = "1028"      
+        y = "1648"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.ActividadDetalle"/>
+      <point      
+        x = "2872"      
+        y = "32"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.GreetingActivity"/>
+      <point      
+        x = "3332"      
+        y = "1676"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.MainActivity"/>
+      <point      
+        x = "-84"      
+        y = "1540"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.Usuarios"/>
+      <point      
+        x = "500"      
+        y = "100"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.Login"/>
+      <point      
+        x = "1980"      
+        y = "1932"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.facebook.FacebookActivity"/>
+      <point      
+        x = "-384"      
+        y = "44"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.MapsActivity"/>
+      <point      
+        x = "-312"      
+        y = "2720"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.Inicio"/>
+      <point      
+        x = "2960"      
+        y = "1840"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.embeddedlapps.primeraversion.Registro"/>
+      <point      
+        x = "3448"      
+        y = "1376"/>
+    </statePointEntry>
+  </locations>
+</navigationModel>

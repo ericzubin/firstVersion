@@ -17,27 +17,52 @@
 
 package com.embeddedlapps.primeraversion;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.ViewHolder> {
+    JSONParser jParser = new JSONParser();
 
     private final FragmentActivity mActivity;
     private final List<UserDetails> mUserDetails = new ArrayList<UserDetails>();
     OnItemClickListener mItemClickListener;
+    ProgressDialog pDialog;
+    private static String url_all_empleados = "http://dtech20.com/appD/promocionesDia.php";
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_promosiones = "Promociones";
+    private static final String TAG_IMG = "img";
+    JSONArray Promociones = null;
+
 
     public ListAdapterHolder(FragmentActivity mActivity) {
         this.mActivity = mActivity;
-        createUserDetails();
+        Log.d("Iniciando Metodo","LoadAll");
+        new LoadAllempleados().execute();
+       // createUserDetails();
     }
 
     @Override
@@ -50,7 +75,11 @@ public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder , int position) {
         holder.vName.setText("Name: " + mUserDetails.get(position).getName());
-        holder.imageView.setImageResource(mUserDetails.get(position).getIdIMagen());
+       // holder.imageView.setImageResource(mUserDetails.get(position).getIdIMagen());
+        Glide.with(mActivity)
+                .load(mUserDetails.get(position).getIdIMagen())
+                .diskCacheStrategy(DiskCacheStrategy.ALL).override(600, 200) .fitCenter()
+                .into(holder.imageView);
 
 
 
@@ -97,6 +126,7 @@ public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.Vi
     /**
      * Create Random Users
      */
+    /*
     private void createUserDetails() {
         for (int i = 0; i < 100; i++) {
             final UserDetails mDetails = new UserDetails();
@@ -107,7 +137,7 @@ public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.Vi
             mUserDetails.add(mDetails);
         }
     }
-
+*/
     /*
      * Snippet from http://stackoverflow.com/a/363692/1008278
      */
@@ -117,5 +147,79 @@ public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.Vi
     }
 
     /* ==========This Part is not necessary========= */
+    class LoadAllempleados extends AsyncTask<String, String, String> {
+
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(mActivity);
+            pDialog.setMessage("Cargando Anuncios. Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        /**
+         * getting All empleados from url
+         * */
+        protected String doInBackground(String... args) {
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            // getting JSON string from URL
+            JSONObject json = jParser.makeHttpRequest(url_all_empleados, "POST", params);
+
+            // Check your log cat for JSON reponse
+            Log.d("All empleados: ", json.toString());
+
+            try {
+                // Checking for SUCCESS TAG
+                int success = json.getInt(TAG_SUCCESS);
+                //Cambiar a 1 cuando se corriga el php
+                if (success == 0) {
+                    // empleados found
+                    // Getting Array of empleados
+                    Promociones = json.getJSONArray(TAG_promosiones);
+                    Log.d("Promociones",Promociones.toString());
+                    // looping through All empleados
+                    for (int i = 0; i < Promociones.length(); i++) {
+                        JSONObject c = Promociones.getJSONObject(i);
+
+                        // Storing each json item in variable
+                        String img = c.getString(TAG_IMG);
+                        Log.d("IMG: ",img);
+
+
+                        final UserDetails mDetails = new UserDetails();
+                        mDetails.setName("Name " + i);
+                        mDetails.setIdIMagen("http://dtech20.com/appD/img/imagenesUsaurios/small/tn_"+img);
+                       mUserDetails.add(mDetails);
+
+                    }
+                } else {
+                    // no empleados found
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all empleados
+            pDialog.dismiss();
+
+
+        }
+
+    }
 
 }
